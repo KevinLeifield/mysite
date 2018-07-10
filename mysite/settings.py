@@ -11,9 +11,17 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import ibm_db
+# from django_comments.models import Comment
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+#print "base dir path", BASE_DIR
+#print os.path.join(os.path.dirname(BASE_DIR), "mysite", "static", "templates")
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(BASE_DIR), "mysite", "static", "templates"),
+) 
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,7 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'notes'
+    # 'django.contrib.flatpages',
+    # 'django.contrib.redirects',
+    # 'django.contrib.comments',
+    'notes.apps.NotesConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +91,18 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default' : {
+#         'ENGINE' : 'ibm_db_django',
+#         'NAME' : 'BACKUP',
+#         'USER' : 'DCOW001',
+#         'PASSWORD' : 'pass5678',
+#         'HOST' : 'backup',
+#         'PORT' : '33101',
+#         'PCONNECT' : True, # Optional property, default is false
+#     }
+# }
 
 
 # Password validation
