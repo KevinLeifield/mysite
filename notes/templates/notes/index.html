@@ -1,20 +1,38 @@
-{% if notes_list %}
-    <ul>
-        {% for text in notes_list %}
-            <li><a href="{% url 'notes:detail' text.id %}">{{ text.text }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <P>No note are avaliables.</p>
-{% endif %}
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expies" content="0">
+        <link rel="stylesheet" type="text/css" href="{% static 'notes/css/style.css' %}" />
+        <script type="text/javascript" src="{% static 'notes/js/run.js' %}"></script>
+    </head>
+    <body>
+        {% if notes_list %}
+            <ul>
+                {% for text in notes_list %}
+                    <li><a href="{% url 'notes:detail' text.id %}">{{ text.text }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <P>No note are avaliables.</p>
+        {% endif %}
 
 
-{% if error_message %} 
-    <p><strong>{{ error_message }}</strong></p>
-{% endif %}
+        {% if error_message %} 
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
 
-<form action="{% url 'notes:add' %}" method="post">
-    {% csrf_token %}
-    <input type="text" name="note" />
-    <input type="submit" value="add" />
-</form>
+        <img src="{% static 'notes/images/test.gif' %}" alt="" />
+
+        <form action="{% url 'notes:add' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="note" />
+            <input type="submit" value="add" />
+        </form>
+    </body>
+</html>
